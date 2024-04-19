@@ -26,6 +26,7 @@ public class InputManager : MonoBehaviour
         playerMovement.Jump.performed += _ => movement.OnJumpPressed();
 
         playerMovement.Interaction.performed += _ => movement.OnInteractionPressed();
+        playerMovement.Shoot.performed += _ => movement.OnMouseShootPressed();
 
         playerMovement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         playerMovement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();

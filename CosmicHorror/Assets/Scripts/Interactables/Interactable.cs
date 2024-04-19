@@ -1,21 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    [SerializeField] List<InteractableAction> actionList;
+    [SerializeField] int timesToUse = 0;
+    [SerializeField] int cooldownTimeMS = 2000;
 
-    private bool wasHit = false;
-
+    private int wasHitTimes = 0;
+    private bool isOnCooldown = false;
 
     public void OnRaycastHit()
     {
-        Debug.Log("You hitted object");
+        if (!isOnCooldown && (wasHitTimes == 0 || wasHitTimes < timesToUse))
+        {
+            foreach (InteractableAction action in actionList)
+            {
+                action.PlayAction();
+            }
 
-        var meshRenderer = GetComponent<MeshRenderer>();
-
-        meshRenderer.material.color = wasHit ? Color.green : Color.red;
-        
-        wasHit = !wasHit;
+            wasHitTimes++;
+        }
     }
 }

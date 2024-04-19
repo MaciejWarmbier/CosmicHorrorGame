@@ -68,4 +68,9 @@ public class MovementController : MonoBehaviour
             Debug.Log("Did not Hit");
         }
     }
+
+    public void OnMouseShootPressed()
+    {
+        Player.PlayerlInstance.ShootWeapon();
+    }
 }

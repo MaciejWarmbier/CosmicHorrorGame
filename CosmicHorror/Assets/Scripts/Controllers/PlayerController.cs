@@ -587,6 +587,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""39c2c724-fd2f-4d5d-b0ce-5c72896c8a4b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -688,6 +697,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ef9874c-1a02-415c-b13a-669ccfde435f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -774,6 +794,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_PlayerMovement_MouseX = m_PlayerMovement.FindAction("MouseX", throwIfNotFound: true);
         m_PlayerMovement_MouseY = m_PlayerMovement.FindAction("MouseY", throwIfNotFound: true);
         m_PlayerMovement_Interaction = m_PlayerMovement.FindAction("Interaction", throwIfNotFound: true);
+        m_PlayerMovement_Shoot = m_PlayerMovement.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -958,6 +979,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_MouseX;
     private readonly InputAction m_PlayerMovement_MouseY;
     private readonly InputAction m_PlayerMovement_Interaction;
+    private readonly InputAction m_PlayerMovement_Shoot;
     public struct PlayerMovementActions
     {
         private @PlayerController m_Wrapper;
@@ -967,6 +989,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @MouseX => m_Wrapper.m_PlayerMovement_MouseX;
         public InputAction @MouseY => m_Wrapper.m_PlayerMovement_MouseY;
         public InputAction @Interaction => m_Wrapper.m_PlayerMovement_Interaction;
+        public InputAction @Shoot => m_Wrapper.m_PlayerMovement_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -991,6 +1014,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Interaction.started += instance.OnInteraction;
             @Interaction.performed += instance.OnInteraction;
             @Interaction.canceled += instance.OnInteraction;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -1010,6 +1036,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Interaction.started -= instance.OnInteraction;
             @Interaction.performed -= instance.OnInteraction;
             @Interaction.canceled -= instance.OnInteraction;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -1092,5 +1121,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }
