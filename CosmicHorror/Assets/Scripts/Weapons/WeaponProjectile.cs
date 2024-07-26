@@ -29,7 +29,10 @@ public class WeaponProjectile : MonoBehaviour
 
         if(other.TryGetComponent(out EnemyAI enemy))
         {
-            StartCoroutine(enemy.TakeDamage(weaponDamage));
+            if(enemy != null)
+            {
+                StartCoroutine(enemy.TakeDamage(weaponDamage));
+            }
         }
     }
 

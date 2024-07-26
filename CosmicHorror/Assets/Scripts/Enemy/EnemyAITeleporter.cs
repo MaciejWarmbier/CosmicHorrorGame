@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GridBrushBase;
 
 public class EnemyAITeleporter : EnemyAI
 {
@@ -8,8 +9,10 @@ public class EnemyAITeleporter : EnemyAI
 
     private bool _isTeleportOnCooldown = false;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         _isTeleportOnCooldown = true;
         WaitForTeleport();
     }
@@ -33,9 +36,10 @@ public class EnemyAITeleporter : EnemyAI
         var direction = target.position - this.transform.position;
         direction.y = 0;
 
-        Vector3 randomPoint = this.transform.position + direction.normalized*5;
+        Quaternion myRotation = Quaternion.AngleAxis(-30, direction.normalized);
+        Vector3 randomPoint = this.transform.position + myRotation * direction.normalized*10 ;
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 5.0f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomPoint, out hit, 10.0f, NavMesh.AllAreas))
         {
             this.transform.position = hit.position;
             WaitForTeleport();

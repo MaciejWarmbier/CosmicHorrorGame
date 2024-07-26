@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e1ecf76799f084a837ef140dbd58cb, type: 3}
+  m_Name: LettersConfig
+  m_EditorClassIdentifier: 
+  letterData:
+  - letter: A
+    letterSprite: {fileID: -406136336, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 2081744242, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: B
+    letterSprite: {fileID: -914922953, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 189390801, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: C
+    letterSprite: {fileID: 1073718426, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: -432060895, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: D
+    letterSprite: {fileID: 622036374, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1050291592, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: E
+    letterSprite: {fileID: -2109462986, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1764592405, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: F
+    letterSprite: {fileID: -1628148051, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1703909453, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: G
+    letterSprite: {fileID: -867996600, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1144397673, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: H
+    letterSprite: {fileID: 487586137, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1684719586, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: I
+    letterSprite: {fileID: 1920287734, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 155760317, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: J
+    letterSprite: {fileID: -307526689, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 217408919, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: K
+    letterSprite: {fileID: -1707312084, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: -1767093200, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: L
+    letterSprite: {fileID: -486952865, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 831680551, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: M
+    letterSprite: {fileID: 223173845, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1236576901, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: N
+    letterSprite: {fileID: -140537121, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1353625237, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: O
+    letterSprite: {fileID: 1030134423, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 2029430003, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: P
+    letterSprite: {fileID: -1190560898, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1071630463, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: R
+    letterSprite: {fileID: -888834007, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: -822232583, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: S
+    letterSprite: {fileID: 455656027, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1249306080, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: T
+    letterSprite: {fileID: 1507910823, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 840316589, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: U
+    letterSprite: {fileID: 2123290487, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: -968045676, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: V
+    letterSprite: {fileID: -274838530, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 1677725067, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: W
+    letterSprite: {fileID: 1380884758, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 438920382, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: X
+    letterSprite: {fileID: 1854638366, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 438920382, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: Y
+    letterSprite: {fileID: 1632741832, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: -1104459957, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+  - letter: Z
+    letterSprite: {fileID: 1865135451, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}
+    letterNewSprite: {fileID: 229267055, guid: cd40aee33fc0688439676028ab3ccf9c, type: 3}

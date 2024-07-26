@@ -1,32 +1,26 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class WeaponMelee : MonoBehaviour
 {
-    [SerializeField] int weaponDamage = 20;
-    [SerializeField] int damageCooldownMS = 2000;
+    public Action EnemyHit;
 
-    private bool _isWeaponOnCooldown= false;
-    private bool _isTriggerOnCooldown = false;
+    public bool _isWeaponOnCooldown= false;
+
 
     private void OnTriggerStay(Collider collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player") && !_isWeaponOnCooldown)
         {
-            WeaponCooldown();
+            EnemyHit?.Invoke();
+            SetupCooldown(true);
             Debug.Log("Enemy Hit");
         }
     }
 
-    private async void WeaponCooldown()
+    public void SetupCooldown(bool setup)
     {
-        if (!_isWeaponOnCooldown)
-        {
-            _isWeaponOnCooldown = true;
-            PlayerStatistics.PlayerStatisticslInstance.ChangeHealth(-weaponDamage);
-            await Task.Delay(damageCooldownMS);
-
-            _isWeaponOnCooldown = false;
-        }
+        _isWeaponOnCooldown = setup;
     }
 }

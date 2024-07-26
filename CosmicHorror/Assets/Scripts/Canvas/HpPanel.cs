@@ -6,25 +6,25 @@ public class HpPanel : MonoBehaviour
 {
     public static HpPanel HpPanelInstance = null;
 
-    [SerializeField] TextMeshProUGUI hpText;
+    //[SerializeField] TextMeshProUGUI hpText;
     [SerializeField] Slider slider;
 
-    void Start()
+    void Awake()
     {
         HpPanelInstance = this;
     }
 
-    public void SetHp(int hpNow)
+    public void SetHp(long hpNow)
     {
         slider.value = hpNow;
-        hpText.text = $"{hpNow}/{slider.maxValue}";
+       // hpText.text = $"{hpNow}/{slider.maxValue}";
     }
 
-    public void Setup(int hpNow, int hpMax)
+    public void Setup(long hpNow, long hpMax)
     {
         slider.maxValue = hpMax;
         slider.value = hpNow;
 
-        hpText.text = $"{hpNow}/{hpMax}";
+      //  hpText.text = $"{hpNow}/{hpMax}";
     }
 }

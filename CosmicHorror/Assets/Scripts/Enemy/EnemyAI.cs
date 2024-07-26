@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEditor.Build;
@@ -6,10 +7,12 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    public Action<EnemyAI> OnEnemyDeath;
+
     [Header ("Statisytics")]
     public long MaxEnemyHealth = 100;
     public long EnemyHealth {  get; private set; }
-    public long AttackSpeed;
+    public float AttackSpeed;
     public long Damage;
     public long Stress;
     public long Speed = 7;
@@ -17,7 +20,6 @@ public class EnemyAI : MonoBehaviour
     [Header("Mechanics")]
     public Color DamagedColor;
     public float damagedSeconds = 0.5f;
-    public float attackCooldown = 0.5f;
     public Color SlowedColor;
 
     [Header("Sprites")]
@@ -32,20 +34,25 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected Transform target;
     [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected WeaponMelee weaponMelee;
 
     private bool hasTakenDamage = false;
     private bool isAnimationOnCooldown = false;
     private bool isAttacking = false;
     private bool isLeft = false;
 
-    private void Start()
+    protected virtual void Start()
     {
+        target = Player.PlayerlInstance.transform;
         EnemyHealth = MaxEnemyHealth;
         hasTakenDamage = false;
         isLeft = false;
-        isAnimationOnCooldown = false;
+        isAnimationOnCooldown = false; 
+        isAttacking = true;
 
         agent.speed = Speed;
+
+        weaponMelee.EnemyHit += () => StartCoroutine(WeaponCooldown());
     }
 
     protected virtual void Update()
@@ -59,6 +66,8 @@ public class EnemyAI : MonoBehaviour
         {
             StartCoroutine(ChangeSprite());
         }
+
+
     }
 
     private IEnumerator ChangeSprite() 
@@ -108,6 +117,7 @@ public class EnemyAI : MonoBehaviour
             if (EnemyHealth < 0)
             {
                 Destroy(gameObject);
+                OnEnemyDeath?.Invoke(this);
                 yield return null;
             }
             else
@@ -120,5 +130,14 @@ public class EnemyAI : MonoBehaviour
                 hasTakenDamage = false;
             }
         }
+    }
+
+    private IEnumerator WeaponCooldown()
+    {
+        isAttacking = false;
+        PlayerStatistics.PlayerStatisticslInstance.ChangeHealth(-Damage);
+        yield return new WaitForSeconds(AttackSpeed);
+        weaponMelee.SetupCooldown(false);
+        isAttacking = true;
     }
 }
