@@ -1,8 +1,13 @@
+using System;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
 #pragma warning disable 649
+
+    public static InputManager InputManagerInstance = null;
+    public Action OnInteractionClicked;
+
 
     [SerializeField] MovementController movement;
     [SerializeField] LookController mouseLook;
@@ -15,6 +20,8 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        InputManagerInstance = this;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -25,11 +32,17 @@ public class InputManager : MonoBehaviour
 
         playerMovement.Jump.performed += _ => movement.OnJumpPressed();
 
-        playerMovement.Interaction.performed += _ => movement.OnInteractionPressed();
+        playerMovement.Interaction.performed += _ => HandleOnInteractionClicked();
         playerMovement.Shoot.performed += _ => movement.OnMouseShootPressed();
 
         playerMovement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         playerMovement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
+    }
+
+    private void HandleOnInteractionClicked()
+    {
+        OnInteractionClicked?.Invoke();
+        movement.OnInteractionPressed();
     }
 
     private void Update()

@@ -12,12 +12,15 @@ public class PlayerStatistics : MonoBehaviour
     public long MaxHealthPoints {  get; private set; }
     public long StressLevel {  get; private set; }
 
+    bool _isSceneLoading = false;
+
     void Start()
     {
         PlayerStatisticslInstance = this;
         MaxHealthPoints = 100;
         HealthPoints = MaxHealthPoints;
 
+        _isSceneLoading = false;
         HpPanel.HpPanelInstance.Setup(HealthPoints, MaxHealthPoints);
     }
 
@@ -26,33 +29,39 @@ public class PlayerStatistics : MonoBehaviour
         HealthPoints += health;
         HpPanel.HpPanelInstance.SetHp(HealthPoints);
 
-        if (HealthPoints <= 0)
+        if (HealthPoints <= 0 && _isSceneLoading == false)
         {
+            _isSceneLoading = true;
             StartCoroutine(LoadYourAsyncScene());
         }
     }
 
     private IEnumerator LoadYourAsyncScene()
-    {
-        // The Application loads the Scene in the background as the current Scene runs.
-        // This is particularly good for creating loading screens.
-        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
-        // a sceneBuildIndex of 1 as shown in Build Settings.
+    { 
         LoadingCanvas.LoadingCanvasInstance.gameObject.SetActive(true);
 
         string currentSceneName = SceneManager.GetActiveScene().name;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentSceneName);
-
+        asyncLoad.allowSceneActivation = false;
         // Wait until the asynchronous scene fully loads
+
+        LoadingCanvas.LoadingCanvasInstance.SetInteraction();
         while (!asyncLoad.isDone)
         {
             yield return null;
 
             if (asyncLoad.progress >= 0.9f)
             {
-                LoadingCanvas.LoadingCanvasInstance.gameObject.SetActive(false);
-                asyncLoad.allowSceneActivation = true;
+                //Wait to you press the space key to activate the Scene
+                if (LoadingCanvas.LoadingCanvasInstance.HasInteracted)
+                {
+                    LoadingCanvas.LoadingCanvasInstance.ResetObject();
+                    asyncLoad.allowSceneActivation = true;
+                }
+
+                LoadingCanvas.LoadingCanvasInstance.ShowClickText(true);
             }
         }
+
     }
 }

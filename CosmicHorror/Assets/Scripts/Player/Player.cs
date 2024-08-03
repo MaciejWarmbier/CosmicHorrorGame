@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] LookController lookController;
 
     [SerializeField] PlayerStatistics playerStatistics;
-    [SerializeField] WeaponProjectile weapon;
+    [SerializeField] WeaponPlayer weapon;
 
     private void Start()
     {
@@ -20,6 +20,6 @@ public class Player : MonoBehaviour
 
     public void ShootWeapon()
     {
-        weapon.ShootParticle();
+        weapon.Attack();
     }
 }

@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using static LettersConfig;
 
-public class ChangeLetterScript : MonoBehaviour
+public class ChangeLetterScriptSprite : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] string letter;
