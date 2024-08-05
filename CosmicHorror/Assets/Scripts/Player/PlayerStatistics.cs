@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.ComponentModel;
 using UnityEngine;
@@ -6,22 +7,68 @@ using AsyncOperation = UnityEngine.AsyncOperation;
 
 public class PlayerStatistics : MonoBehaviour
 {
+    public Action OnRevolverUsed;
+
     public static PlayerStatistics PlayerStatisticslInstance = null;
 
     public long HealthPoints {  get; private set; }
     public long MaxHealthPoints {  get; private set; }
     public long StressLevel {  get; private set; }
 
+    [Header("Revolver")]
+    public int RevolverAmmo;
+    public int RevolverLoadedAmmo;
+    public int RevolverMaxAmmo;
+
     bool _isSceneLoading = false;
+
+    private void Awake()
+    {
+        PlayerStatisticslInstance = this;
+
+        MaxHealthPoints = 100;
+        HealthPoints = MaxHealthPoints;
+    }
 
     void Start()
     {
-        PlayerStatisticslInstance = this;
         MaxHealthPoints = 100;
         HealthPoints = MaxHealthPoints;
 
         _isSceneLoading = false;
         HpPanel.HpPanelInstance.Setup(HealthPoints, MaxHealthPoints);
+    }
+
+    public void UseRevolver()
+    {
+        RevolverLoadedAmmo--;
+        OnRevolverUsed?.Invoke();
+    }
+
+    public int GetReloadValue()
+    {
+        return  RevolverMaxAmmo - RevolverLoadedAmmo;
+    }
+
+    public void ReloadRevolver()
+    {
+        var reloadValue = GetReloadValue();
+
+        if (reloadValue > 0)
+        {
+            if (RevolverAmmo < reloadValue)
+            {
+                RevolverLoadedAmmo += RevolverAmmo;
+                RevolverAmmo = 0;
+            }
+            else
+            {
+                RevolverLoadedAmmo = RevolverMaxAmmo;
+                RevolverAmmo -= reloadValue;
+            }
+
+            OnRevolverUsed?.Invoke();
+        }
     }
 
     public void ChangeHealth(long health)

@@ -7,6 +7,8 @@ public class Interactable : MonoBehaviour
     [SerializeField] int timesToUse = 0;
     [SerializeField] int cooldownTimeMS = 2000;
 
+    public bool CanBeInteracted => !isOnCooldown && (wasHitTimes == 0 || wasHitTimes < timesToUse);
+
     private int wasHitTimes = 0;
     private bool isOnCooldown = false;
 

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9e92a879296c643b08839231df541d, type: 3}
+  m_Name: SoundConfig
+  m_EditorClassIdentifier: 
+  audioData:
+  - Enum: 1
+    audioClip: {fileID: 8300000, guid: 4dac57cab5df3c74d83b5bb6660fd781, type: 3}
+  - Enum: 2
+    audioClip: {fileID: 8300000, guid: 9bf9a16dd3099204099ba21edd90e0b4, type: 3}
+  - Enum: 3
+    audioClip: {fileID: 8300000, guid: 8f060a0f805a5df4badf916fa7b4be2a, type: 3}
+  - Enum: 4
+    audioClip: {fileID: 8300000, guid: 5fa5f0d5e52d5334995a7aa292628008, type: 3}
+  - Enum: 5
+    audioClip: {fileID: 8300000, guid: 50b2dd30ec22ba14f891fc39ac410c3c, type: 3}
+  - Enum: 6
+    audioClip: {fileID: 8300000, guid: 9b525a53eb5bc4349b9dab810c84633b, type: 3}
+  - Enum: 7
+    audioClip: {fileID: 8300000, guid: 59e4e395e9946824aaaa632d4770973b, type: 3}
+  - Enum: 8
+    audioClip: {fileID: 8300000, guid: eae2ad1185fee80408cb1f9dee69dc51, type: 3}
+  - Enum: 9
+    audioClip: {fileID: 8300000, guid: 0f2ff670bbd10ea4bb1d8d79cf91b533, type: 3}
+  - Enum: 10
+    audioClip: {fileID: 8300000, guid: 707c88d9d13a214498f816e12612a0a4, type: 3}
+  - Enum: 11
+    audioClip: {fileID: 8300000, guid: a3c40fd5edad8c1439abd93a382b790a, type: 3}
+  - Enum: 12
+    audioClip: {fileID: 8300000, guid: d653f5324544fa24db71946fc1c14128, type: 3}
+  - Enum: 13
+    audioClip: {fileID: 8300000, guid: ac28a6ec9847e5f4e91d8a59187d5c3d, type: 3}
+  - Enum: 14
+    audioClip: {fileID: 8300000, guid: e4c7ecda0e6b59f42ac6e7228c56b28a, type: 3}
+  - Enum: 15
+    audioClip: {fileID: 8300000, guid: 7111c245ab56dec44985b0ce0a919fc3, type: 3}
+  - Enum: 16
+    audioClip: {fileID: 8300000, guid: b22a900e7b0311a48ac0e4df78fef835, type: 3}
+  - Enum: 18
+    audioClip: {fileID: 8300000, guid: c6dee1653bb48554fb4fe4b988199c3c, type: 3}
+  - Enum: 17
+    audioClip: {fileID: 8300000, guid: 93ddb5a875b97d44a8379673a6e13684, type: 3}
+  - Enum: 19
+    audioClip: {fileID: 8300000, guid: 91ddccd09348ca34b9633efa0e5c4026, type: 3}
+  - Enum: 20
+    audioClip: {fileID: 8300000, guid: a2718b996ba52124e8ca2a0bf5c0115e, type: 3}
+  - Enum: 21
+    audioClip: {fileID: 8300000, guid: 30c3b3d27995b964db7e15e41299e599, type: 3}

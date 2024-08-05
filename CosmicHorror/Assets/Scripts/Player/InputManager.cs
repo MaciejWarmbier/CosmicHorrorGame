@@ -34,6 +34,8 @@ public class InputManager : MonoBehaviour
 
         playerMovement.Interaction.performed += _ => HandleOnInteractionClicked();
         playerMovement.Shoot.performed += _ => movement.OnMouseShootPressed();
+        playerMovement.Reload.performed += _ => movement.OnReloadPressed();
+        playerMovement.ChangeWeapon.performed += _ => movement.OnChangeWeaponPressed();
 
         playerMovement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         playerMovement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();

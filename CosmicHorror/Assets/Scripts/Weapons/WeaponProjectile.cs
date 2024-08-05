@@ -14,8 +14,10 @@ public class WeaponProjectile : WeaponPlayer
     [SerializeField] int weaponAmmo = 5;
     [SerializeField] float weaponCooldown = 1f;
     [SerializeField] float weaponReload = 1.5f;
+    [SerializeField] float pushPower = 0.5f;
     [SerializeField] GameObject explosion;
     [SerializeField] ParticleSystem ParticleSystem;
+    [SerializeField] AudioSource AudioSource;
 
     List<ParticleCollisionEvent> CollisionEvents = new();
     Sequence mainSequence;
@@ -25,6 +27,10 @@ public class WeaponProjectile : WeaponPlayer
     bool isWeaponOnCooldown = false;
     bool isWeaponOnRealod = false;
 
+    private void OnEnable()
+    {
+        isWeaponOnCooldown = false;
+    }
 
     private void OnParticleCollision(GameObject other)
     {
@@ -42,20 +48,60 @@ public class WeaponProjectile : WeaponPlayer
         {
             if(enemy != null)
             {
-                StartCoroutine(enemy.TakeDamage(weaponDamage));
+                StartCoroutine(enemy.TakeDamage(pushPower, weaponDamage));
             }
         }
     }
 
     public override void Attack()
     {
-        if(!isWeaponOnCooldown && !isWeaponOnRealod)
+        if(PlayerStatistics.PlayerStatisticslInstance.RevolverLoadedAmmo > 0)
         {
-            isWeaponOnCooldown =true;
-            StartCoroutine(WeaponCooldown());
-            ParticleSystem.Play();
-            PlayShootAnimation();
+            if (!isWeaponOnCooldown && !isWeaponOnRealod)
+            {
+                isWeaponOnCooldown = true;
+                StartCoroutine(WeaponCooldown());
+                ParticleSystem.Play();
+                PlayShootAnimation();
+                AudioSource.clip = MusicPanel.MusicPanelInstance.SoundConfig.GetAudioClip(SoundConfig.AudioEnum.shot);
+                AudioSource.Play();
+                PlayerStatistics.PlayerStatisticslInstance.UseRevolver();
+            }
         }
+        else
+        {
+            Reload();
+        }
+    }
+
+    public override void Reload()
+    {
+        base.Reload();
+
+        if (PlayerStatistics.PlayerStatisticslInstance.RevolverAmmo > 0
+            && PlayerStatistics.PlayerStatisticslInstance.GetReloadValue() > 0)
+        {
+            if (!isWeaponOnRealod && !isWeaponOnCooldown)
+            {
+                isWeaponOnRealod = true;
+                StartCoroutine(WeaponReload());
+                PlayReloadAnimation();
+                AudioSource.clip = MusicPanel.MusicPanelInstance.SoundConfig.GetAudioClip(SoundConfig.AudioEnum.reload);
+                AudioSource.Play();
+            }
+        }
+        else
+        {
+            AudioSource.clip = MusicPanel.MusicPanelInstance.SoundConfig.GetAudioClip(SoundConfig.AudioEnum.empty_gun);
+            AudioSource.Play();
+        }
+    }
+
+    private IEnumerator WeaponReload()
+    {
+        yield return new WaitForSeconds(weaponReload);
+        isWeaponOnRealod = false;
+        PlayerStatistics.PlayerStatisticslInstance.ReloadRevolver();
     }
 
     private IEnumerator WeaponCooldown()
@@ -95,5 +141,21 @@ public class WeaponProjectile : WeaponPlayer
         triggerSequence.Play();
         mainSequence.Play();
         drumSequence.Play();
+    }
+
+    private void PlayReloadAnimation()
+    {
+        mainSequence?.Kill();
+
+        mainSequence = DOTween.Sequence();
+
+        var originalRotationMain = WeaponMain.localEulerAngles;
+        var newRotationMain = WeaponMain.localEulerAngles + new Vector3(70, 0, 0);
+
+        mainSequence.Append(WeaponMain.DOLocalRotate(newRotationMain, weaponReload *3/4))
+            .Append(WeaponMain.DOLocalRotate(originalRotationMain, weaponCooldown *1/4));
+        mainSequence.SetEase(Ease.Linear);
+
+        mainSequence.Play();
     }
 }

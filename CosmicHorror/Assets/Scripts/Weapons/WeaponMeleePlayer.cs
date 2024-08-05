@@ -10,7 +10,9 @@ public class WeaponMeleePlayer : WeaponPlayer
     [SerializeField] PlayerCollider attackCollider;
     [SerializeField] int weaponDamage = 10;
     [SerializeField] float weaponCooldown = 1f;
+    [SerializeField] float pushPower = 2f;
     [SerializeField] GameObject explosion;
+    [SerializeField] AudioSource audioSource;
 
     Sequence mainSequence;
 
@@ -23,6 +25,11 @@ public class WeaponMeleePlayer : WeaponPlayer
         attackCollider.HandleOnTriggerStay += OnOpponentHit;
     }
 
+    private void OnEnable()
+    {
+        isWeaponOnCooldown = false;
+    }
+
     private void OnOpponentHit(Collider collision)
     {
         if (collision.transform.CompareTag("Enemy"))
@@ -31,7 +38,7 @@ public class WeaponMeleePlayer : WeaponPlayer
             {
                 if (enemy != null)
                 {
-                    StartCoroutine(enemy.TakeDamage(weaponDamage));
+                    StartCoroutine(enemy.TakeDamage(pushPower, weaponDamage));
                 }
             }
         }
@@ -45,6 +52,7 @@ public class WeaponMeleePlayer : WeaponPlayer
             StartCoroutine(WeaponCooldown());
             StartCoroutine(ActivateCollider());
             PlayAttackAnimation();
+            audioSource.Play();
         }
     }
 

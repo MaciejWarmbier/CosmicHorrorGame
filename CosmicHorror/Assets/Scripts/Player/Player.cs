@@ -11,15 +11,49 @@ public class Player : MonoBehaviour
     [SerializeField] LookController lookController;
 
     [SerializeField] PlayerStatistics playerStatistics;
-    [SerializeField] WeaponPlayer weapon;
+    [SerializeField] WeaponPlayer Machete;
+    [SerializeField] WeaponPlayer Revolver;
+
+    private WeaponPlayer chosenWeapon;
 
     private void Start()
     {
         PlayerlInstance = this;
+        chosenWeapon = Machete;
+    }
+
+    public void SwitchWeapon()
+    {
+        chosenWeapon.gameObject.SetActive(false);
+
+        if (chosenWeapon.weaponEnum == WeaponPanel.WeaponEnum.Machete)
+        {
+            chosenWeapon = Revolver;
+        }
+        else
+        {
+            chosenWeapon = Machete;
+        }
+
+        chosenWeapon.gameObject.SetActive(true);
+        WeaponPanel.WeaponPanelInstance.OnWeaponSwap(chosenWeapon.weaponEnum);
     }
 
     public void ShootWeapon()
     {
-        weapon.Attack();
+        chosenWeapon.Attack();
+    }
+
+    public void Reload()
+    {
+        chosenWeapon.Reload();
+    }
+
+    public void MovePlayer(Transform pushTransform)
+    {
+        if (pushTransform != null)
+        {
+            StartCoroutine(movementController.MovePlayer(pushTransform));
+        }
     }
 }

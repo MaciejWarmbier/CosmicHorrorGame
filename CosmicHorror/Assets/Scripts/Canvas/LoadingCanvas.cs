@@ -13,8 +13,6 @@ public class LoadingCanvas : MonoBehaviour
     public bool HasInteracted = false;
     private int usedIndexes;
 
-    
-
     void Awake()
     {
         DontDestroyOnLoad(this);

@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Threading.Tasks;
-using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,6 +30,7 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] protected NavMeshAgent agent;
+    [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Transform target;
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] protected WeaponMelee weaponMelee;
@@ -48,7 +47,7 @@ public class EnemyAI : MonoBehaviour
         hasTakenDamage = false;
         isLeft = false;
         isAnimationOnCooldown = false; 
-        isAttacking = true;
+        isAttacking = false;
 
         agent.speed = Speed;
 
@@ -59,7 +58,10 @@ public class EnemyAI : MonoBehaviour
     {
         if(target != null)
         {
-            agent.SetDestination(target.position);
+            if(agent.enabled)
+            {
+                agent.SetDestination(target.position);
+            }
         }
 
         if(!isAnimationOnCooldown)
@@ -67,7 +69,10 @@ public class EnemyAI : MonoBehaviour
             StartCoroutine(ChangeSprite());
         }
 
-
+        if(Vector3.Distance(target.position, transform.position) < 10)
+        {
+            isAttacking = true;
+        }
     }
 
     private IEnumerator ChangeSprite() 
@@ -106,7 +111,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public IEnumerator TakeDamage(int damage)
+    public IEnumerator TakeDamage(float pushPower, int damage)
     {
         if(!hasTakenDamage)
         {
@@ -124,18 +129,34 @@ public class EnemyAI : MonoBehaviour
             {
                 spriteRenderer.color = DamagedColor;
 
+                rb.isKinematic = false;
+                agent.enabled = false;
+                rb.AddForce(-transform.forward.normalized * pushPower, ForceMode.Impulse);
+                StartCoroutine(StopPushing());
+                
+
                 yield return new WaitForSeconds(damagedSeconds);
 
                 spriteRenderer.color = Color.white;
                 hasTakenDamage = false;
+
             }
         }
+    }
+
+    private IEnumerator StopPushing()
+    {
+        yield return new WaitForSeconds(damagedSeconds);
+
+        rb.isKinematic = true;
+        agent.enabled = true;
     }
 
     private IEnumerator WeaponCooldown()
     {
         isAttacking = false;
         PlayerStatistics.PlayerStatisticslInstance.ChangeHealth(-Damage);
+        Player.PlayerlInstance.MovePlayer(transform);
         yield return new WaitForSeconds(AttackSpeed);
         weaponMelee.SetupCooldown(false);
         isAttacking = true;

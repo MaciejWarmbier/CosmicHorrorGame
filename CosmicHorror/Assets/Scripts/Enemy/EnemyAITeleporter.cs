@@ -5,7 +5,9 @@ using static UnityEngine.GridBrushBase;
 
 public class EnemyAITeleporter : EnemyAI
 {
-    [SerializeField] private int teleportCooldown = 5000;
+    [SerializeField] private int teleportCooldownMin = 3000;
+    [SerializeField] private int teleportCooldownMax = 7000;
+    [SerializeField] AudioSource teleportSound;
 
     private bool _isTeleportOnCooldown = false;
 
@@ -42,6 +44,7 @@ public class EnemyAITeleporter : EnemyAI
         if (NavMesh.SamplePosition(randomPoint, out hit, 10.0f, NavMesh.AllAreas))
         {
             this.transform.position = hit.position;
+            teleportSound.Play();
             WaitForTeleport();
         }
         else
@@ -52,7 +55,7 @@ public class EnemyAITeleporter : EnemyAI
 
     private async void WaitForTeleport()
     {
-        await Task.Delay(teleportCooldown);
+        await Task.Delay(Random.Range(teleportCooldownMin, teleportCooldownMax));
 
         _isTeleportOnCooldown = false;
     }
