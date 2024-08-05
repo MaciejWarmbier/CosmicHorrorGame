@@ -35,7 +35,7 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _animationTime: 0.2
+    - _animationTime: 0.025
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &906865315244385648
