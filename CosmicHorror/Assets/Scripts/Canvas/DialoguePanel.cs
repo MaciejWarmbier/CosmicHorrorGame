@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
@@ -10,7 +11,7 @@ public class DialoguePanel : MonoBehaviour
     public static DialoguePanel DialoguePanelInstance = null;
 
     [SerializeField] TextMeshProUGUI dialogueText;
-    [SerializeField] int dialogueTimeMS = 4000;
+    [SerializeField] float dialogueTime= 4;
 
     private bool _isDialogueActive = false;
     private Queue<DialogueData> dialogueQueue = new();
@@ -20,7 +21,7 @@ public class DialoguePanel : MonoBehaviour
         DialoguePanelInstance = this;
     }
 
-    public async void ShowDialogue(DialogueData dialogueData)
+    public IEnumerator ShowDialogue(DialogueData dialogueData)
     {
         if (!_isDialogueActive)
         {
@@ -28,7 +29,7 @@ public class DialoguePanel : MonoBehaviour
             dialogueText.text = dialogueData.Text;
             dialogueText.gameObject.SetActive(true);
 
-            await Task.Delay(dialogueData.ShowTimeMS != 0 ? dialogueData.ShowTimeMS : dialogueTimeMS);
+            yield return new WaitForSeconds(dialogueData.ShowTime != 0 ? dialogueData.ShowTime : dialogueTime);
 
             dialogueText.gameObject.SetActive(false);
             onDialogueEnded?.Invoke();
@@ -60,7 +61,14 @@ public class DialoguePanel : MonoBehaviour
     public class DialogueData
     {
         public string Text;
-        public int ShowTimeMS;
+        public float ShowTime;
         public Color Color;
+
+        public DialogueData(string text, float showTime, Color color)
+        {
+            Text = text;
+            ShowTime = showTime;
+            Color = color;
+        }
     }
 }

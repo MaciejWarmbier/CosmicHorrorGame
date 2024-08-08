@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using static ItemsConfig;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -10,10 +13,10 @@ public class EnemyAI : MonoBehaviour
     [Header ("Statisytics")]
     public long MaxEnemyHealth = 100;
     public long EnemyHealth {  get; private set; }
-    public float AttackSpeed;
     public long Damage;
     public long Stress;
     public long Speed = 7;
+    [SerializeField] List<RandomItemData> lootData;
 
     [Header("Mechanics")]
     public Color DamagedColor;
@@ -51,7 +54,9 @@ public class EnemyAI : MonoBehaviour
 
         agent.speed = Speed;
 
-        weaponMelee.EnemyHit += () => StartCoroutine(WeaponCooldown());
+        weaponMelee.EnemyHit += () =>OnHit();
+        weaponMelee.OnAttack += () => { isAttacking = false; };
+        weaponMelee.OnStartCharge += () => { isAttacking = true; };
     }
 
     protected virtual void Update()
@@ -71,7 +76,7 @@ public class EnemyAI : MonoBehaviour
 
         if(Vector3.Distance(target.position, transform.position) < 10)
         {
-            isAttacking = true;
+            StartCoroutine(weaponMelee.Charging());
         }
     }
 
@@ -121,6 +126,7 @@ public class EnemyAI : MonoBehaviour
 
             if (EnemyHealth < 0)
             {
+                SpawnLoot();
                 Destroy(gameObject);
                 OnEnemyDeath?.Invoke(this);
                 yield return null;
@@ -144,6 +150,20 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void SpawnLoot()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, 100);
+
+        var itemEnum = lootData.FirstOrDefault(x => x.chanceMax > randomIndex && x.chanceMin <= randomIndex).itemEnum;
+
+        if(itemEnum != ItemsEnum.None)
+        {
+            var prefab = GameController.GameControllerInstance.ItemsConfig.GetItem(itemEnum);
+
+            Instantiate(prefab, transform.position, Quaternion.identity);
+        }
+    }
+
     private IEnumerator StopPushing()
     {
         yield return new WaitForSeconds(damagedSeconds);
@@ -152,13 +172,9 @@ public class EnemyAI : MonoBehaviour
         agent.enabled = true;
     }
 
-    private IEnumerator WeaponCooldown()
+    private void OnHit()
     {
-        isAttacking = false;
         PlayerStatistics.PlayerStatisticslInstance.ChangeHealth(-Damage);
         Player.PlayerlInstance.MovePlayer(transform);
-        yield return new WaitForSeconds(AttackSpeed);
-        weaponMelee.SetupCooldown(false);
-        isAttacking = true;
     }
 }

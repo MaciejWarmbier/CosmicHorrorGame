@@ -13,7 +13,7 @@ public class PlayerStatistics : MonoBehaviour
 
     public long HealthPoints {  get; private set; }
     public long MaxHealthPoints {  get; private set; }
-    public long StressLevel {  get; private set; }
+    public int StressLevel {  get; private set; }
 
     [Header("Revolver")]
     public int RevolverAmmo;
@@ -28,6 +28,7 @@ public class PlayerStatistics : MonoBehaviour
 
         MaxHealthPoints = 100;
         HealthPoints = MaxHealthPoints;
+        StressLevel = 0;
     }
 
     void Start()
@@ -36,7 +37,14 @@ public class PlayerStatistics : MonoBehaviour
         HealthPoints = MaxHealthPoints;
 
         _isSceneLoading = false;
-        HpPanel.HpPanelInstance.Setup(HealthPoints, MaxHealthPoints);
+        CalculateHealth();
+        HpPanel.HpPanelInstance.Setup(HealthPoints, MaxHealthPoints, StressLevel);
+    }
+
+    public void ChangeAmmo(int ammo)
+    {
+        RevolverAmmo += ammo;
+        OnRevolverUsed?.Invoke();
     }
 
     public void UseRevolver()
@@ -74,7 +82,28 @@ public class PlayerStatistics : MonoBehaviour
     public void ChangeHealth(long health)
     {
         HealthPoints += health;
-        HpPanel.HpPanelInstance.SetHp(HealthPoints);
+        CalculateHealth();
+
+        if (HealthPoints <= 0 && _isSceneLoading == false)
+        {
+            _isSceneLoading = true;
+            StartCoroutine(LoadYourAsyncScene());
+        }
+    }
+
+    private void CalculateHealth()
+    {
+        HealthPoints = HealthPoints > MaxHealthPoints ? MaxHealthPoints : HealthPoints;
+        HealthPoints = Math.Min(HealthPoints, MaxHealthPoints - StressLevel *10);
+        HpPanel.HpPanelInstance.SetHp(HealthPoints, StressLevel);
+    }
+
+    public void ChangeStress(int stress)
+    {
+        StressLevel += stress;
+        StressLevel = StressLevel < 0 ? 0 : StressLevel;
+
+        CalculateHealth();
 
         if (HealthPoints <= 0 && _isSceneLoading == false)
         {

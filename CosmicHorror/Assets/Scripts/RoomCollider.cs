@@ -8,6 +8,7 @@ public class RoomCollider : MonoBehaviour
     [SerializeField] string TagCollider;
     [SerializeField] List<EnemySpawner> enemySpawners;
     [SerializeField] List<GameObject> doors;
+    [SerializeField] int stressDeletion;
 
     private List<EnemyAI> spawnedEnemies = new();
     bool isUsed = false;
@@ -40,6 +41,8 @@ public class RoomCollider : MonoBehaviour
             {
                 door.SetActive(false);
             }
+
+            PlayerStatistics.PlayerStatisticslInstance.ChangeStress(-stressDeletion);
         }
     }
 

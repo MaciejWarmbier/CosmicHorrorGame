@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class InteractableActionPickupItem : InteractableAction
 {
-    [SerializeField] Sprite pickupSprite;
     [SerializeField] bool deleteAfterInteraction = true;
+    [SerializeField] AudioSource audioSource;
 
     public override void PlayAction()
     {
-        ItemPanel.ItemPanelInstance.AddItem(pickupSprite);
-        
-        if(deleteAfterInteraction)
+        audioSource.clip = MusicPanel.MusicPanelInstance.SoundConfig.GetAudioClip(SoundConfig.AudioEnum.pickup);
+        audioSource.Play();
+
+        if (deleteAfterInteraction)
         {
             Destroy(this.gameObject);
         }

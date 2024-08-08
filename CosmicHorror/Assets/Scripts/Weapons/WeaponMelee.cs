@@ -5,38 +5,69 @@ using UnityEngine;
 
 public class WeaponMelee : MonoBehaviour
 {
+    public WeaponState weaponState;
     public Action EnemyHit;
+    public Action OnAttack;
+    public Action OnStartCharge;
+
     [SerializeField] AudioSource attackAudio;
-    [SerializeField] float chargingTime;
+    public float AttackSpeed;
+    public float AttackCooldown;
+    public float AttackCharging;
 
-    public bool _isWeaponOnCooldown= false;
-    public bool _isWeaponCharged= false;
-
+    private void Awake()
+    {
+        weaponState = WeaponState.Normal;
+    }
 
     private void OnTriggerStay(Collider collision)
     {
-        if (collision.transform.CompareTag("Player") && !_isWeaponOnCooldown && _isWeaponCharged)
+        if (weaponState == WeaponState.Charged)
         {
-            EnemyHit?.Invoke();
-            SetupCooldown(true);
-            attackAudio.Play();
-            Debug.Log("Enemy Hit");
-            _isWeaponCharged = false;
+            if (collision.transform.CompareTag("Player"))
+            {
+                attackAudio.Play();
+                EnemyHit?.Invoke();
+                StartCoroutine(Cooldown());
+                Debug.Log("Enemy Hit");
+            }
+        }
+    }
+    
+    public IEnumerator Cooldown()
+    {
+        if(weaponState != WeaponState.Cooldown)
+        {
+            OnAttack?.Invoke();
+            weaponState = WeaponState.Cooldown;
+            yield return new WaitForSeconds(AttackCooldown);
+            weaponState = WeaponState.Normal;
         }
     }
 
-    public IEnumerator ChargeWeapon()
+    public IEnumerator Charging()
     {
-        if (!_isWeaponOnCooldown)
+        if(weaponState == WeaponState.Normal)
         {
-            yield return new WaitForSeconds(chargingTime);
-
-            _isWeaponCharged = true;
+            OnStartCharge?.Invoke();
+            weaponState = WeaponState.Charging;
+            yield return new WaitForSeconds(AttackCharging);
+            weaponState = WeaponState.Charged;
+            StartCoroutine(AttackTime());
         }
     }
 
-    public void SetupCooldown(bool setup)
+    public IEnumerator AttackTime()
     {
-        _isWeaponOnCooldown = setup;
+        yield return new WaitForSeconds(AttackSpeed);
+        StartCoroutine(Cooldown());
+    }
+
+    public enum WeaponState
+    {
+        Charging,
+        Cooldown,
+        Charged,
+        Normal
     }
 }

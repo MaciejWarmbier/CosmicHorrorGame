@@ -67,8 +67,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37546efc111d197428f03ed9f99b365c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponState: 0
   attackAudio: {fileID: 1047103597374405637}
-  _isWeaponOnCooldown: 0
+  AttackSpeed: 0.5
+  AttackCooldown: 1
+  AttackCharging: 0.5
 --- !u!82 &1047103597374405637
 AudioSource:
   m_ObjectHideFlags: 0
@@ -324,10 +327,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxEnemyHealth: 100
-  AttackSpeed: 1.5
   Damage: 25
   Stress: 0
   Speed: 15
+  lootData:
+  - itemEnum: 1
+    chanceMin: 0
+    chanceMax: 30
+  - itemEnum: 4
+    chanceMin: 31
+    chanceMax: 70
+  - itemEnum: 3
+    chanceMin: 71
+    chanceMax: 100
   DamagedColor: {r: 0.735849, g: 0.4130473, b: 0.4130473, a: 1}
   damagedSeconds: 0.5
   SlowedColor: {r: 0.16456035, g: 0.8113208, b: 0.75826067, a: 1}
