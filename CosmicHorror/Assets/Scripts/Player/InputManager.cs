@@ -38,6 +38,7 @@ public class InputManager : MonoBehaviour
         playerMovement.ChangeWeapon.performed += _ => movement.OnChangeWeaponPressed();
 
         playerMovement.Escape.performed += _ => OnEscapeClick();
+        playerMovement.Exit.performed += _ => Application.Quit();
         playerMovement.ChangeLetter.performed += _ => OnEnterClick();
         playerMovement.DialogueInteraction.performed += ctx => OnDialogueClick(ctx.ReadValue<float>());
         playerMovement.Reset.performed += _ => ResetScene();
@@ -49,7 +50,7 @@ public class InputManager : MonoBehaviour
 
     private void OnDialogueClick(float number)
     {
-        if(DialoguePanel.DialoguePanelInstance.possibleDialogues >= (int)number)
+        if(DialoguePanel.DialoguePanelInstance.possibleDialogues != 0 && DialoguePanel.DialoguePanelInstance.possibleDialogues >= (int)number)
         {
             controls.Disable();
             DialoguePanel.DialoguePanelInstance?.OnDialogueClick((int)number);

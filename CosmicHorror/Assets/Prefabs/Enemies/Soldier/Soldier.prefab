@@ -71,7 +71,7 @@ MonoBehaviour:
   attackAudio: {fileID: 1047103597374405637}
   AttackSpeed: 0.5
   AttackCooldown: 0.7
-  AttackCharging: 0.3
+  AttackCharging: 0.5
 --- !u!82 &1047103597374405637
 AudioSource:
   m_ObjectHideFlags: 0
@@ -356,6 +356,7 @@ MonoBehaviour:
   target: {fileID: 0}
   spriteRenderer: {fileID: 187724497270614842}
   weaponMelee: {fileID: 2338199013559714817}
+  distanceToPlayer: 15
 --- !u!54 &2524611122310891629
 Rigidbody:
   m_ObjectHideFlags: 0

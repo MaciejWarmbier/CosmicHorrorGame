@@ -7,6 +7,7 @@ using static GameController;
 public class DialogueCollider : MonoBehaviour
 {
     [SerializeField] Collider Collider;
+    [SerializeField] GameEventsEnum gameEventUnlock;
     [SerializeField] string TagCollider;
     [SerializeField] List<DialogueData> dialogueData;
 
@@ -22,6 +23,7 @@ public class DialogueCollider : MonoBehaviour
                 }
             }
             Collider.enabled = false;
+            GameController.GameControllerInstance.AddEvent(gameEventUnlock);
         }
     }
 }

@@ -127,7 +127,14 @@ public class PlayerStatistics : MonoBehaviour
 
     private IEnumerator LoadYourAsyncScene()
     {
+
+        if (GameController.GameControllerInstance.WasEventDone(GameController.GameEventsEnum.RespawnedForFirstTime))
+        {
+            GameController.GameControllerInstance.AddEvent(GameController.GameEventsEnum.RespawnedSecondTime);
+        }
+
         GameController.GameControllerInstance.AddEvent(GameController.GameEventsEnum.RespawnedForFirstTime);
+
         LoadingCanvas.LoadingCanvasInstance.gameObject.SetActive(true);
 
         string currentSceneName = SceneManager.GetActiveScene().name;

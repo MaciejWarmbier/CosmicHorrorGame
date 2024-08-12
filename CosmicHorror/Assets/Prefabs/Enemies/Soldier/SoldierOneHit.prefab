@@ -71,7 +71,7 @@ MonoBehaviour:
   attackAudio: {fileID: 1047103597374405637}
   AttackSpeed: 0.5
   AttackCooldown: 0.7
-  AttackCharging: 0.3
+  AttackCharging: 0.5
 --- !u!82 &1047103597374405637
 AudioSource:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b956545f493674b91c28b9766a4afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxEnemyHealth: 10
+  MaxEnemyHealth: 15
   Damage: 10
   Stress: 0
   Speed: 35
@@ -356,6 +356,7 @@ MonoBehaviour:
   target: {fileID: 0}
   spriteRenderer: {fileID: 187724497270614842}
   weaponMelee: {fileID: 2338199013559714817}
+  distanceToPlayer: 20
 --- !u!54 &2524611122310891629
 Rigidbody:
   m_ObjectHideFlags: 0

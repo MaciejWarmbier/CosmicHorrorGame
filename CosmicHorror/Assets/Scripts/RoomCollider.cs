@@ -34,6 +34,11 @@ public class RoomCollider : MonoBehaviour
                 otherRoom.SetActive(false);
             }
 
+            if (isStarting)
+            {
+                DialoguePanel.DialoguePanelInstance.HideDialogueOptions();
+            }
+
             isUsed = true;
             if (isStarting && GameController.GameControllerInstance.WasEventDone(GameController.GameEventsEnum.RespawnedForFirstTime))
             {

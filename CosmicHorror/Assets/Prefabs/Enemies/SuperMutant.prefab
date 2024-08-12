@@ -162,7 +162,7 @@ MonoBehaviour:
   MaxEnemyHealth: 120
   Damage: 20
   Stress: 2
-  Speed: 10
+  Speed: 20
   lootData:
   - itemEnum: 1
     chanceMin: 0
@@ -186,6 +186,7 @@ MonoBehaviour:
   target: {fileID: 0}
   spriteRenderer: {fileID: 3865810412611187740}
   weaponMelee: {fileID: 6175405001961534037}
+  distanceToPlayer: 15
   teleportCooldownMin: 1500
   teleportCooldownMax: 2000
   teleportSound: {fileID: 23281987745572812}
@@ -374,8 +375,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9999999, y: 0.9999977, z: 1.0941454}
+  m_Center: {x: 0, y: 0, z: 0.04707237}
 --- !u!114 &6175405001961534037
 MonoBehaviour:
   m_ObjectHideFlags: 0

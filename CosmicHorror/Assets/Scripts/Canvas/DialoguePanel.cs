@@ -24,6 +24,17 @@ public class DialoguePanel : MonoBehaviour
         DialoguePanelInstance = this;
     }
 
+    public void HideDialogueOptions()
+    {
+        possibleDialogues = 0;
+        OnDialogueClick = null;
+
+        for (int i = 0; i < dialogueOptions.Count; i++)
+        {
+            dialogueOptions[i].gameObject.SetActive(false);
+        }
+    }
+
     public void ShowDialogueOptions(List<string> dialogues, Color color, Action<int> onDialogueClick)
     {
         possibleDialogues = dialogues.Count;
@@ -49,12 +60,7 @@ public class DialoguePanel : MonoBehaviour
 
     public IEnumerator ShowDialogueCoroutine(DialogueData dialogueData)
     {
-        for (int i = 0; i < dialogueOptions.Count; i++)
-        {
-            dialogueOptions[i].gameObject.SetActive(false);
-        }
-
-        possibleDialogues = 0;
+        HideDialogueOptions();
 
         if (dialogueData.GameEventsEnum == GameController.GameEventsEnum.None ||
             GameController.GameControllerInstance.WasEventDone(dialogueData.GameEventsEnum))

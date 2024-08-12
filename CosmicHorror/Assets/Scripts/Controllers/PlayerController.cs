@@ -650,6 +650,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""7443f8a3-ba57-4cb4-af37-d1bd3e9744dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -905,6 +914,39 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Reset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""ecc1a6a8-a61a-45ea-9594-f47534e97127"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""28dcf176-6f5d-4273-804e-9c7601b474b2"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""45054b5e-e61f-48cf-a33d-aa8ca1233833"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -998,6 +1040,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_PlayerMovement_DialogueInteraction = m_PlayerMovement.FindAction("DialogueInteraction", throwIfNotFound: true);
         m_PlayerMovement_ChangeLetter = m_PlayerMovement.FindAction("ChangeLetter", throwIfNotFound: true);
         m_PlayerMovement_Reset = m_PlayerMovement.FindAction("Reset", throwIfNotFound: true);
+        m_PlayerMovement_Exit = m_PlayerMovement.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1189,6 +1232,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_DialogueInteraction;
     private readonly InputAction m_PlayerMovement_ChangeLetter;
     private readonly InputAction m_PlayerMovement_Reset;
+    private readonly InputAction m_PlayerMovement_Exit;
     public struct PlayerMovementActions
     {
         private @PlayerController m_Wrapper;
@@ -1205,6 +1249,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @DialogueInteraction => m_Wrapper.m_PlayerMovement_DialogueInteraction;
         public InputAction @ChangeLetter => m_Wrapper.m_PlayerMovement_ChangeLetter;
         public InputAction @Reset => m_Wrapper.m_PlayerMovement_Reset;
+        public InputAction @Exit => m_Wrapper.m_PlayerMovement_Exit;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1250,6 +1295,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Reset.started += instance.OnReset;
             @Reset.performed += instance.OnReset;
             @Reset.canceled += instance.OnReset;
+            @Exit.started += instance.OnExit;
+            @Exit.performed += instance.OnExit;
+            @Exit.canceled += instance.OnExit;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -1290,6 +1338,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Reset.started -= instance.OnReset;
             @Reset.performed -= instance.OnReset;
             @Reset.canceled -= instance.OnReset;
+            @Exit.started -= instance.OnExit;
+            @Exit.performed -= instance.OnExit;
+            @Exit.canceled -= instance.OnExit;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -1379,5 +1430,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnDialogueInteraction(InputAction.CallbackContext context);
         void OnChangeLetter(InputAction.CallbackContext context);
         void OnReset(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }

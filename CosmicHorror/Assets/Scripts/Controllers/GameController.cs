@@ -33,6 +33,12 @@ public class GameController : MonoBehaviour
     public void AddLetter(string letter)
     {
         knownLetters.Add(letter);
+
+        if(knownLetters.Count == 3)
+        {
+            AddEvent(GameEventsEnum.ThreeLettersKnown);
+        }
+
         OnLetterAdded?.Invoke(letter);
     }
 
@@ -65,6 +71,12 @@ public class GameController : MonoBehaviour
         RespawnedForFirstTime,
         PlantHistory,
         AppleCollected,
-        GoIntoCave
+        GoIntoCave,
+        WasAppleGiven,
+        ThreeLettersKnown,
+        SeenMutant,
+        Finish,
+        RespawnedSecondTime,
+        Magazine
     }
 }

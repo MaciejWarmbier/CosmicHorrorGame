@@ -37,6 +37,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] protected Transform target;
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] protected WeaponMelee weaponMelee;
+    [SerializeField] protected float distanceToPlayer = 15f;
 
     private bool hasTakenDamage = false;
     private bool isAnimationOnCooldown = false;
@@ -74,7 +75,7 @@ public class EnemyAI : MonoBehaviour
             StartCoroutine(ChangeSprite());
         }
 
-        if(Vector3.Distance(target.position, transform.position) < 10)
+        if(Vector3.Distance(target.position, transform.position) < distanceToPlayer)
         {
             StartCoroutine(weaponMelee.Charging());
         }
@@ -129,7 +130,7 @@ public class EnemyAI : MonoBehaviour
 
             EnemyHealth -= damage;
 
-            if (EnemyHealth < 0)
+            if (EnemyHealth <= 0)
             {
                 SpawnLoot();
                 Destroy(gameObject);

@@ -17,7 +17,7 @@ public class Interactable : MonoBehaviour
 
     private void Start()
     {
-        if (GameController.GameControllerInstance.WasEventDone(gameEvent) && deleteIfEvent)
+        if (gameEvent != GameEventsEnum.None && GameController.GameControllerInstance.WasEventDone(gameEvent) && deleteIfEvent)
         {
             if(deleteIfEvent)
             {
