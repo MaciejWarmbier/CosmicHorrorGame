@@ -19,9 +19,9 @@ public class EnemyAITeleporter : EnemyAI
         WaitForTeleport();
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
 
         if(target != null)
         {
@@ -41,7 +41,7 @@ public class EnemyAITeleporter : EnemyAI
         Quaternion myRotation = Quaternion.AngleAxis(-30, direction.normalized);
         Vector3 randomPoint = this.transform.position + myRotation * direction.normalized*10 ;
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 10.0f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomPoint, out hit, 30.0f, NavMesh.AllAreas))
         {
             this.transform.position = hit.position;
             teleportSound.Play();

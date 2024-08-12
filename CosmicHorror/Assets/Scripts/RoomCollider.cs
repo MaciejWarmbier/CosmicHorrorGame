@@ -8,7 +8,9 @@ public class RoomCollider : MonoBehaviour
     [SerializeField] string TagCollider;
     [SerializeField] List<EnemySpawner> enemySpawners;
     [SerializeField] List<GameObject> doors;
+    [SerializeField] List<GameObject> otherRoomColliders;
     [SerializeField] int stressDeletion;
+    [SerializeField] bool isStarting = false;
 
     private List<EnemyAI> spawnedEnemies = new();
     bool isUsed = false;
@@ -27,7 +29,16 @@ public class RoomCollider : MonoBehaviour
                 door.SetActive(true);
             }
 
+            foreach(GameObject otherRoom in otherRoomColliders)
+            {
+                otherRoom.SetActive(false);
+            }
+
             isUsed = true;
+            if (isStarting && GameController.GameControllerInstance.WasEventDone(GameController.GameEventsEnum.RespawnedForFirstTime))
+            {
+                CaveController.CaveControllerInstance.PutShaderOnFirstCooldown();
+            }
         }
     }
 

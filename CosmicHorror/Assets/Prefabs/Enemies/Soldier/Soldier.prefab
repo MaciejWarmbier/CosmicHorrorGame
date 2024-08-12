@@ -70,8 +70,8 @@ MonoBehaviour:
   weaponState: 0
   attackAudio: {fileID: 1047103597374405637}
   AttackSpeed: 0.5
-  AttackCooldown: 1
-  AttackCharging: 0.5
+  AttackCooldown: 0.7
+  AttackCharging: 0.3
 --- !u!82 &1047103597374405637
 AudioSource:
   m_ObjectHideFlags: 0
@@ -326,19 +326,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b956545f493674b91c28b9766a4afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxEnemyHealth: 100
-  Damage: 25
+  MaxEnemyHealth: 30
+  Damage: 20
   Stress: 0
-  Speed: 15
+  Speed: 27
   lootData:
   - itemEnum: 1
     chanceMin: 0
-    chanceMax: 30
+    chanceMax: 40
   - itemEnum: 4
-    chanceMin: 31
-    chanceMax: 70
+    chanceMin: 41
+    chanceMax: 74
   - itemEnum: 3
-    chanceMin: 71
+    chanceMin: 75
+    chanceMax: 90
+  - itemEnum: 2
+    chanceMin: 91
     chanceMax: 100
   DamagedColor: {r: 0.735849, g: 0.4130473, b: 0.4130473, a: 1}
   damagedSeconds: 0.5

@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 {
     public Action<string> OnLetterAdded;
 
-    public static GameController GameControllerInstance = null;
+    public static GameController GameControllerInstance;
     public LettersConfig LettersConfig;
     public ItemsConfig ItemsConfig;
     public List<string> knownLetters = new List<string>();
@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        events.Remove(GameEventsEnum.GoIntoCave);
     }
 
     public void AddLetter(string letter)
@@ -37,7 +39,10 @@ public class GameController : MonoBehaviour
 
     public void AddEvent(GameEventsEnum eventsEnum)
     {
-        events.Add(eventsEnum);
+        if (!events.Contains(eventsEnum))
+        {
+            events.Add(eventsEnum);
+        }
     }
 
     public bool WasEventDone(GameEventsEnum eventsEnum)
@@ -54,8 +59,12 @@ public class GameController : MonoBehaviour
 
     public enum GameEventsEnum
     {
+        None = 0,
         FlintHistory,
         KilledFirstEnemy,
-        RespawnedForFirstTime
+        RespawnedForFirstTime,
+        PlantHistory,
+        AppleCollected,
+        GoIntoCave
     }
 }

@@ -13,6 +13,7 @@ public class PlayerStatistics : MonoBehaviour
 
     public long HealthPoints {  get; private set; }
     public long MaxHealthPoints {  get; private set; }
+    public int MaxStress {  get; private set; }
     public int StressLevel {  get; private set; }
 
     [Header("Revolver")]
@@ -27,6 +28,7 @@ public class PlayerStatistics : MonoBehaviour
         PlayerStatisticslInstance = this;
 
         MaxHealthPoints = 100;
+        MaxStress = 9;
         HealthPoints = MaxHealthPoints;
         StressLevel = 0;
     }
@@ -103,21 +105,34 @@ public class PlayerStatistics : MonoBehaviour
         StressLevel += stress;
         StressLevel = StressLevel < 0 ? 0 : StressLevel;
 
+        if (StressLevel >= MaxStress && _isSceneLoading == false)
+        {
+            _isSceneLoading = true;
+            ReloadScene();
+        }
+
         CalculateHealth();
 
         if (HealthPoints <= 0 && _isSceneLoading == false)
         {
-            _isSceneLoading = true;
-            StartCoroutine(LoadYourAsyncScene());
+            ReloadScene();
         }
     }
 
+    public void ReloadScene()
+    {
+        _isSceneLoading = true;
+        StartCoroutine(LoadYourAsyncScene());
+    }
+
     private IEnumerator LoadYourAsyncScene()
-    { 
+    {
+        GameController.GameControllerInstance.AddEvent(GameController.GameEventsEnum.RespawnedForFirstTime);
         LoadingCanvas.LoadingCanvasInstance.gameObject.SetActive(true);
 
         string currentSceneName = SceneManager.GetActiveScene().name;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentSceneName);
+        yield return null;
         asyncLoad.allowSceneActivation = false;
         // Wait until the asynchronous scene fully loads
 

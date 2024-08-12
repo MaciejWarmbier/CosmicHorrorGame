@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     public long MaxEnemyHealth = 100;
     public long EnemyHealth {  get; private set; }
     public long Damage;
-    public long Stress;
+    public int Stress;
     public long Speed = 7;
     [SerializeField] List<RandomItemData> lootData;
 
@@ -59,7 +59,7 @@ public class EnemyAI : MonoBehaviour
         weaponMelee.OnStartCharge += () => { isAttacking = true; };
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         if(target != null)
         {
@@ -116,7 +116,12 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public IEnumerator TakeDamage(float pushPower, int damage)
+    public void TakeDamage(float pushPower, int damage)
+    {
+        StartCoroutine(TakeDamageCoroutine(pushPower, damage));
+    }
+
+    private IEnumerator TakeDamageCoroutine(float pushPower, int damage)
     {
         if(!hasTakenDamage)
         {
@@ -152,15 +157,17 @@ public class EnemyAI : MonoBehaviour
 
     private void SpawnLoot()
     {
-        int randomIndex = UnityEngine.Random.Range(0, 100);
-
-        var itemEnum = lootData.FirstOrDefault(x => x.chanceMax > randomIndex && x.chanceMin <= randomIndex).itemEnum;
-
-        if(itemEnum != ItemsEnum.None)
+        if (lootData != null)
         {
-            var prefab = GameController.GameControllerInstance.ItemsConfig.GetItem(itemEnum);
+            int randomIndex = UnityEngine.Random.Range(0, 100);
+            var itemEnum = lootData.FirstOrDefault(x => x.chanceMax > randomIndex && x.chanceMin <= randomIndex).itemEnum;
 
-            Instantiate(prefab, transform.position, Quaternion.identity);
+            if (itemEnum != ItemsEnum.None)
+            {
+                var prefab = GameController.GameControllerInstance.ItemsConfig.GetItem(itemEnum);
+
+                Instantiate(prefab, transform.position, Quaternion.identity);
+            }
         }
     }
 
@@ -175,6 +182,7 @@ public class EnemyAI : MonoBehaviour
     private void OnHit()
     {
         PlayerStatistics.PlayerStatisticslInstance.ChangeHealth(-Damage);
+        PlayerStatistics.PlayerStatisticslInstance.ChangeStress(Stress);
         Player.PlayerlInstance.MovePlayer(transform);
     }
 }

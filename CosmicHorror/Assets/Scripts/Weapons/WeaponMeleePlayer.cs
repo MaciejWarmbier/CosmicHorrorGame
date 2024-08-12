@@ -38,7 +38,7 @@ public class WeaponMeleePlayer : WeaponPlayer
             {
                 if (enemy != null)
                 {
-                    StartCoroutine(enemy.TakeDamage(pushPower, weaponDamage));
+                    enemy.TakeDamage(pushPower, weaponDamage);
                 }
             }
         }

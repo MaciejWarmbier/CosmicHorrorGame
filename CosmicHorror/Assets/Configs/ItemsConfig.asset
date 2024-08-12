@@ -17,3 +17,9 @@ MonoBehaviour:
     gameObject: {fileID: 4312893521503086137, guid: c66b3c564000068489a5e9611d7c6482, type: 3}
   - itemEnum: 3
     gameObject: {fileID: 2689691541611698465, guid: 9a39caf0d8b3d2649b5bd9a778a013a0, type: 3}
+  - itemEnum: 2
+    gameObject: {fileID: 4312893521503086137, guid: 9e57fd9d9ccdc384e9e8ff46342c5518, type: 3}
+  - itemEnum: 6
+    gameObject: {fileID: 4312893521503086137, guid: bd750e9e7e47ebb4d942cc90445acc4d, type: 3}
+  - itemEnum: 7
+    gameObject: {fileID: 2689691541611698465, guid: 9a39caf0d8b3d2649b5bd9a778a013a0, type: 3}

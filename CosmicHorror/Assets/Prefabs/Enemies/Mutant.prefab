@@ -159,10 +159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b3f9c316c11b647a6c9b352ace647d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxEnemyHealth: 100
-  Damage: 10
-  Stress: 0
-  Speed: 7
+  MaxEnemyHealth: 45
+  Damage: 15
+  Stress: 1
+  Speed: 20
   lootData:
   - itemEnum: 1
     chanceMin: 0
@@ -186,8 +186,8 @@ MonoBehaviour:
   target: {fileID: 0}
   spriteRenderer: {fileID: 3865810412611187740}
   weaponMelee: {fileID: 6175405001961534037}
-  teleportCooldownMin: 3000
-  teleportCooldownMax: 7000
+  teleportCooldownMin: 2000
+  teleportCooldownMax: 5000
   teleportSound: {fileID: 23281987745572812}
 --- !u!54 &736387578436727434
 Rigidbody:
@@ -390,8 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponState: 0
   attackAudio: {fileID: 3453116449203302139}
-  AttackSpeed: 0.5
-  AttackCooldown: 2
+  AttackSpeed: 1
+  AttackCooldown: 1
   AttackCharging: 0.5
 --- !u!82 &3453116449203302139
 AudioSource:

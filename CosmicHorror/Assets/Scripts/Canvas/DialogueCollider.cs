@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static DialoguePanel;
+using static GameController;
 
 public class DialogueCollider : MonoBehaviour
 {
@@ -15,9 +16,12 @@ public class DialogueCollider : MonoBehaviour
         {
             foreach (DialogueData data in dialogueData)
             {
-                DialoguePanel.DialoguePanelInstance.ShowDialogue(data);
-                Collider.enabled = false;
+                if (data.BlockedAfterGameEventsEnum == GameController.GameEventsEnum.None ||  !GameController.GameControllerInstance.WasEventDone(data.BlockedAfterGameEventsEnum))
+                {
+                    DialoguePanel.DialoguePanelInstance.ShowDialogue(data);
+                }
             }
+            Collider.enabled = false;
         }
     }
 }

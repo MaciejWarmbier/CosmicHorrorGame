@@ -18,7 +18,7 @@ public class LookController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.Rotate(Vector3.up, mouseX * Time.deltaTime);
 

@@ -30,6 +30,7 @@ public class WeaponProjectile : WeaponPlayer
     private void OnEnable()
     {
         isWeaponOnCooldown = false;
+        isWeaponOnRealod =false;
     }
 
     private void OnParticleCollision(GameObject other)
@@ -48,7 +49,7 @@ public class WeaponProjectile : WeaponPlayer
         {
             if(enemy != null)
             {
-                StartCoroutine(enemy.TakeDamage(pushPower, weaponDamage));
+                enemy.TakeDamage(pushPower, weaponDamage);
             }
         }
     }

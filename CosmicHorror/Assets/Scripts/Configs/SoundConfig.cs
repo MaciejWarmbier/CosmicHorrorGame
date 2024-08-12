@@ -45,5 +45,7 @@ public class SoundConfig : ScriptableObject
         empty_gun = 19,
         pickup = 20,
         aaah_hmmm = 21,
+        cave_sound = 22,
+        scrattching = 23,
     }
 }

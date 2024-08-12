@@ -37,8 +37,43 @@ public class InputManager : MonoBehaviour
         playerMovement.Reload.performed += _ => movement.OnReloadPressed();
         playerMovement.ChangeWeapon.performed += _ => movement.OnChangeWeaponPressed();
 
+        playerMovement.Escape.performed += _ => OnEscapeClick();
+        playerMovement.ChangeLetter.performed += _ => OnEnterClick();
+        playerMovement.DialogueInteraction.performed += ctx => OnDialogueClick(ctx.ReadValue<float>());
+        playerMovement.Reset.performed += _ => ResetScene();
+        playerMovement.DialogueInteraction.performed += ctx => OnDialogueClick(ctx.ReadValue<float>());
+
         playerMovement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         playerMovement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
+    }
+
+    private void OnDialogueClick(float number)
+    {
+        if(DialoguePanel.DialoguePanelInstance.possibleDialogues >= (int)number)
+        {
+            controls.Disable();
+            DialoguePanel.DialoguePanelInstance?.OnDialogueClick((int)number);
+        }
+    }
+
+    private void ResetScene()
+    {
+        PlayerStatistics.PlayerStatisticslInstance.ReloadScene();
+    }
+
+    public void EnableInputSystem()
+    {
+        controls.Enable();
+    }
+
+    private void OnEscapeClick()
+    {
+        LetterCanvas.LetterCanvasInstance.Show();
+    }
+
+    private void OnEnterClick()
+    {
+        LetterCanvas.LetterCanvasInstance.Change();
     }
 
     private void HandleOnInteractionClicked()
@@ -47,10 +82,13 @@ public class InputManager : MonoBehaviour
         movement.OnInteractionPressed();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        movement.ReceiveInput(horizontalInput);
-        mouseLook.ReceiveInput(mouseInput);
+        if (Time.timeScale != 0)
+        {
+            movement.ReceiveInput(horizontalInput);
+            mouseLook.ReceiveInput(mouseInput);
+        }
     }
 
     private void OnEnable()

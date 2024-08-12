@@ -1,4 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
+using static GameController;
 
 public class LetterInteractable : InteractableAction
 {
@@ -7,8 +8,14 @@ public class LetterInteractable : InteractableAction
 
     public override void PlayAction()
     {
-        GameController.GameControllerInstance.AddLetter(letter);
-        letterAudio.Play();
-        PlayerStatistics.PlayerStatisticslInstance.ChangeStress(1);
+        if (GameController.GameControllerInstance.knownLetters.Contains(letter))
+        {
+            DialoguePanel.DialoguePanelInstance.ShowDialogue(new DialoguePanel.DialogueData("Pamiętam ten znak...", 2, Color.red, GameEventsEnum.None));
+        }else
+        {
+            GameController.GameControllerInstance.AddLetter(letter);
+            letterAudio.Play();
+            PlayerStatistics.PlayerStatisticslInstance.ChangeStress(1);
+        }
     }
 }

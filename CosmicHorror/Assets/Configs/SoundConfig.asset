@@ -55,3 +55,7 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: a2718b996ba52124e8ca2a0bf5c0115e, type: 3}
   - Enum: 21
     audioClip: {fileID: 8300000, guid: 30c3b3d27995b964db7e15e41299e599, type: 3}
+  - Enum: 22
+    audioClip: {fileID: 8300000, guid: c53f8f59ee663d746b591c22a2eaf72f, type: 3}
+  - Enum: 23
+    audioClip: {fileID: 8300000, guid: 658a1b0298e624f45bbb75e9043221cd, type: 3}

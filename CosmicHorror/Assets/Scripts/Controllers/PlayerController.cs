@@ -614,6 +614,42 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e74166e-efe2-427d-a76d-b0e741ccd725"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DialogueInteraction"",
+                    ""type"": ""Value"",
+                    ""id"": ""314ef8df-1258-43ea-bd46-3d82570929e5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeLetter"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec995127-f231-4ca4-9d66-61e3f3b943f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""d478f2ba-d421-4a47-b56c-4f6cc92ed2b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -748,6 +784,127 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e600a0e3-6e7f-485b-b92f-8e25fb9401cf"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f8c1581-8f24-41ec-8b1e-d18d6dbc9488"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": """",
+                    ""action"": ""DialogueInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""942474fc-5ec4-4ab1-8973-1d517b9045a6"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""DialogueInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4889d6e1-04e6-40b8-a648-04cb10cb6802"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""DialogueInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fd8b6d7-558e-41e0-9507-36078df2372b"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": """",
+                    ""action"": ""DialogueInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2841bb62-ffa8-4307-808b-daf601a8a664"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": """",
+                    ""action"": ""DialogueInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8dca547f-d5f1-4b4c-b936-5ba3dab95e5c"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=6)"",
+                    ""groups"": """",
+                    ""action"": ""DialogueInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a184c028-07f1-467b-bad9-7ecac77d6491"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeLetter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""c941c941-d7e7-4e38-98ce-033de1124a41"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""461fe200-d247-4055-b484-8195e3b23ceb"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""9db26875-9b33-464c-8407-85e1d5bdae1d"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -837,6 +994,10 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_PlayerMovement_Shoot = m_PlayerMovement.FindAction("Shoot", throwIfNotFound: true);
         m_PlayerMovement_ChangeWeapon = m_PlayerMovement.FindAction("ChangeWeapon", throwIfNotFound: true);
         m_PlayerMovement_Reload = m_PlayerMovement.FindAction("Reload", throwIfNotFound: true);
+        m_PlayerMovement_Escape = m_PlayerMovement.FindAction("Escape", throwIfNotFound: true);
+        m_PlayerMovement_DialogueInteraction = m_PlayerMovement.FindAction("DialogueInteraction", throwIfNotFound: true);
+        m_PlayerMovement_ChangeLetter = m_PlayerMovement.FindAction("ChangeLetter", throwIfNotFound: true);
+        m_PlayerMovement_Reset = m_PlayerMovement.FindAction("Reset", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1024,6 +1185,10 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Shoot;
     private readonly InputAction m_PlayerMovement_ChangeWeapon;
     private readonly InputAction m_PlayerMovement_Reload;
+    private readonly InputAction m_PlayerMovement_Escape;
+    private readonly InputAction m_PlayerMovement_DialogueInteraction;
+    private readonly InputAction m_PlayerMovement_ChangeLetter;
+    private readonly InputAction m_PlayerMovement_Reset;
     public struct PlayerMovementActions
     {
         private @PlayerController m_Wrapper;
@@ -1036,6 +1201,10 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_PlayerMovement_Shoot;
         public InputAction @ChangeWeapon => m_Wrapper.m_PlayerMovement_ChangeWeapon;
         public InputAction @Reload => m_Wrapper.m_PlayerMovement_Reload;
+        public InputAction @Escape => m_Wrapper.m_PlayerMovement_Escape;
+        public InputAction @DialogueInteraction => m_Wrapper.m_PlayerMovement_DialogueInteraction;
+        public InputAction @ChangeLetter => m_Wrapper.m_PlayerMovement_ChangeLetter;
+        public InputAction @Reset => m_Wrapper.m_PlayerMovement_Reset;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1069,6 +1238,18 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
+            @DialogueInteraction.started += instance.OnDialogueInteraction;
+            @DialogueInteraction.performed += instance.OnDialogueInteraction;
+            @DialogueInteraction.canceled += instance.OnDialogueInteraction;
+            @ChangeLetter.started += instance.OnChangeLetter;
+            @ChangeLetter.performed += instance.OnChangeLetter;
+            @ChangeLetter.canceled += instance.OnChangeLetter;
+            @Reset.started += instance.OnReset;
+            @Reset.performed += instance.OnReset;
+            @Reset.canceled += instance.OnReset;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -1097,6 +1278,18 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
+            @DialogueInteraction.started -= instance.OnDialogueInteraction;
+            @DialogueInteraction.performed -= instance.OnDialogueInteraction;
+            @DialogueInteraction.canceled -= instance.OnDialogueInteraction;
+            @ChangeLetter.started -= instance.OnChangeLetter;
+            @ChangeLetter.performed -= instance.OnChangeLetter;
+            @ChangeLetter.canceled -= instance.OnChangeLetter;
+            @Reset.started -= instance.OnReset;
+            @Reset.performed -= instance.OnReset;
+            @Reset.canceled -= instance.OnReset;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -1182,5 +1375,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
+        void OnDialogueInteraction(InputAction.CallbackContext context);
+        void OnChangeLetter(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
     }
 }
