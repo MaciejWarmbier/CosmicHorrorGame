@@ -160,14 +160,22 @@ public class EnemyAI : MonoBehaviour
     {
         if (lootData != null)
         {
-            int randomIndex = UnityEngine.Random.Range(0, 100);
-            var itemEnum = lootData.FirstOrDefault(x => x.chanceMax > randomIndex && x.chanceMin <= randomIndex).itemEnum;
-
-            if (itemEnum != ItemsEnum.None)
+            try
             {
-                var prefab = GameController.GameControllerInstance.ItemsConfig.GetItem(itemEnum);
+                int randomIndex = UnityEngine.Random.Range(0, 100);
+                var itemEnum = lootData.FirstOrDefault(x => x.chanceMax > randomIndex && x.chanceMin <= randomIndex).itemEnum;
 
-                Instantiate(prefab, transform.position, Quaternion.identity);
+                if (itemEnum != ItemsEnum.None)
+                {
+                    var prefab = GameController.GameControllerInstance.ItemsConfig.GetItem(itemEnum);
+
+                    Instantiate(prefab, transform.position, Quaternion.identity);
+                }
+            }
+            catch
+            {
+                Destroy(gameObject);
+                OnEnemyDeath?.Invoke(this);
             }
         }
     }

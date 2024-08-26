@@ -32,6 +32,7 @@ public class LetterCanvas : MonoBehaviour
 
     public void Show()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         firstPage.SetActive(true);
         secondPage.SetActive(false);
@@ -43,6 +44,7 @@ public class LetterCanvas : MonoBehaviour
     {
         if (canvas.enabled)
         {
+            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             firstPage.SetActive(false);
             secondPage.SetActive(true);
